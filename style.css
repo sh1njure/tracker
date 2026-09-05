@@ -101,6 +101,49 @@ body{
 .btn-white{background:#fff}
 .btn-sm{font-size:14px;padding:5px 10px;box-shadow:3px 3px 0 #000}
 
+/* ---------- BANK PANEL ---------- */
+.bank-panel{
+  margin:20px 24px 4px;
+  background:var(--yellow);
+  border:var(--border);
+  box-shadow:var(--shadow);
+  padding:16px 20px;
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:16px;
+  transform:rotate(-.5deg);
+}
+.bank-main{
+  display:flex;
+  align-items:baseline;
+  gap:14px;
+  flex:1;
+  min-width:220px;
+}
+.bank-label{
+  font-family:'Bangers',cursive;
+  font-size:30px;
+  letter-spacing:1px;
+}
+.bank-value{
+  font-family:'Bangers',cursive;
+  font-size:clamp(38px,6vw,64px);
+  line-height:1;
+  color:var(--red);
+  -webkit-text-stroke:2px #000;
+  text-shadow:var(--shadow-sm);
+}
+.bank-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.bank-controls .amount-input{width:130px;flex:none}
+.bank-history-wrap{
+  width:100%;
+  border-top:3px dashed #000;
+  padding-top:10px;
+}
+.bank-history-wrap .history-list{max-height:260px}
+.hist-note{font-style:italic;font-weight:600;color:#555;font-size:12px}
+
 /* ---------- TOOLBAR ---------- */
 .toolbar{
   display:flex;

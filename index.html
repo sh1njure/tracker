@@ -21,16 +21,16 @@
 
     <div class="stats-panel">
       <div class="stat">
-        <span class="stat-label">НАКОПЛЕНО</span>
-        <span class="stat-value" id="statSaved">€0</span>
-      </div>
-      <div class="stat">
         <span class="stat-label">ЦЕЛЬ ВСЕГО</span>
         <span class="stat-value" id="statTotal">€0</span>
       </div>
       <div class="stat">
         <span class="stat-label">ПРОГРЕСС</span>
         <span class="stat-value" id="statProgress">0%</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">ЗАКРЫТО</span>
+        <span class="stat-value" id="statDone">0/0</span>
       </div>
     </div>
 
@@ -41,6 +41,23 @@
       <input type="file" id="importFile" accept="application/json" hidden>
     </div>
   </header>
+
+  <!-- ОБЩИЙ БАНК -->
+  <section class="bank-panel">
+    <div class="bank-main">
+      <span class="bank-label">💰 БАНК</span>
+      <span class="bank-value" id="bankValue">€0</span>
+    </div>
+    <div class="bank-controls">
+      <input type="number" id="bankAmount" class="amount-input" placeholder="сумма €" min="0" step="1">
+      <button class="btn btn-yellow" id="bankPlus">+ €</button>
+      <button class="btn btn-red" id="bankMinus">− €</button>
+      <button class="btn btn-white" id="bankHistoryBtn">ИСТОРИЯ</button>
+    </div>
+    <div class="bank-history-wrap" id="bankHistoryWrap" hidden>
+      <ul class="history-list" id="bankHistoryList"></ul>
+    </div>
+  </section>
 
   <div class="toolbar">
     <span class="toolbar-label">СОРТИРОВКА:</span>
@@ -78,14 +95,9 @@
           <img id="imgPreview" alt="preview">
           <button type="button" class="btn btn-red btn-sm" id="clearImg">убрать</button>
         </div>
-        <div class="row">
-          <label>Цена цели (€)
-            <input type="number" id="fPrice" min="0" step="0.01" placeholder="0">
-          </label>
-          <label>Накоплено (€)
-            <input type="number" id="fSaved" min="0" step="0.01" placeholder="0">
-          </label>
-        </div>
+        <label>Цена цели (€)
+          <input type="number" id="fPrice" min="0" step="0.01" placeholder="0">
+        </label>
         <label>Ссылка на товар
           <input type="url" id="fLink" placeholder="https://...">
         </label>
@@ -117,18 +129,9 @@
           <span class="money-left"></span>
         </div>
         <p class="goal-note"></p>
-        <div class="goal-controls">
-          <input type="number" class="amount-input" placeholder="€" min="0" step="1">
-          <button class="btn btn-yellow btn-sm btn-plus">+ €</button>
-          <button class="btn btn-red btn-sm btn-minus">− €</button>
-        </div>
         <div class="goal-actions">
           <button class="btn btn-blue btn-sm btn-go">GO!</button>
-          <button class="btn btn-white btn-sm btn-edit">✎</button>
-          <button class="btn btn-white btn-sm btn-history">ИСТОРИЯ</button>
-        </div>
-        <div class="history-wrap" hidden>
-          <ul class="history-list"></ul>
+          <button class="btn btn-white btn-sm btn-edit">✎ ИЗМЕНИТЬ</button>
         </div>
       </div>
     </article>
