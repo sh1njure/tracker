@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MONEY TRACKER</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="halftone-bg"></div>
+
+  <header class="topbar">
+    <div class="logo-wrap">
+      <h1 class="logo">MONEY<span>TRACKER</span></h1>
+    </div>
+
+    <div class="stats-panel">
+      <div class="stat">
+        <span class="stat-label">НАКОПЛЕНО</span>
+        <span class="stat-value" id="statSaved">€0</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">ЦЕЛЬ ВСЕГО</span>
+        <span class="stat-value" id="statTotal">€0</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">ПРОГРЕСС</span>
+        <span class="stat-value" id="statProgress">0%</span>
+      </div>
+    </div>
+
+    <div class="topbar-actions">
+      <button class="btn btn-yellow" id="btnAdd">+ ЦЕЛЬ</button>
+      <button class="btn btn-blue" id="btnExport">EXPORT</button>
+      <button class="btn btn-blue" id="btnImport">IMPORT</button>
+      <input type="file" id="importFile" accept="application/json" hidden>
+    </div>
+  </header>
+
+  <div class="toolbar">
+    <span class="toolbar-label">СОРТИРОВКА:</span>
+    <button class="chip" data-sort="manual">Вручную</button>
+    <button class="chip" data-sort="progress">По прогрессу</button>
+    <button class="chip" data-sort="price">По цене</button>
+  </div>
+
+  <main id="goals" class="goals-grid"></main>
+
+  <div class="empty-state" id="emptyState" hidden>
+    <div class="empty-bubble">
+      <p>Пока пусто!</p>
+      <p class="small">Жми «+ ЦЕЛЬ» и добавь первую мечту</p>
+    </div>
+  </div>
+
+  <!-- Модалка цели -->
+  <div class="modal-overlay" id="goalModal" hidden>
+    <div class="modal">
+      <button class="modal-close" id="modalClose">✕</button>
+      <h2 class="modal-title" id="modalTitle">НОВАЯ ЦЕЛЬ</h2>
+      <form id="goalForm">
+        <input type="hidden" id="goalId">
+        <label>Название
+          <input type="text" id="fName" required placeholder="Porsche Cayman 981">
+        </label>
+        <label>Картинка (URL)
+          <input type="url" id="fImageUrl" placeholder="https://...">
+        </label>
+        <label>...или загрузи файл
+          <input type="file" id="fImageFile" accept="image/*">
+        </label>
+        <div class="img-preview-wrap" id="imgPreviewWrap" hidden>
+          <img id="imgPreview" alt="preview">
+          <button type="button" class="btn btn-red btn-sm" id="clearImg">убрать</button>
+        </div>
+        <div class="row">
+          <label>Цена цели (€)
+            <input type="number" id="fPrice" min="0" step="0.01" placeholder="0">
+          </label>
+          <label>Накоплено (€)
+            <input type="number" id="fSaved" min="0" step="0.01" placeholder="0">
+          </label>
+        </div>
+        <label>Ссылка на товар
+          <input type="url" id="fLink" placeholder="https://...">
+        </label>
+        <label>Заметка
+          <textarea id="fNote" rows="2" placeholder="необязательно"></textarea>
+        </label>
+        <div class="modal-actions">
+          <button type="submit" class="btn btn-yellow">СОХРАНИТЬ</button>
+          <button type="button" class="btn btn-red" id="btnDelete" hidden>УДАЛИТЬ</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <template id="goalCardTpl">
+    <article class="goal-card">
+      <div class="goal-img-wrap">
+        <img class="goal-img" alt="">
+        <div class="boom-bubble" hidden>GOAL!</div>
+      </div>
+      <div class="goal-body">
+        <h3 class="goal-name"></h3>
+        <div class="progress-outer">
+          <div class="progress-inner"></div>
+          <span class="progress-pct"></span>
+        </div>
+        <div class="goal-money">
+          <span class="money-saved"></span>
+          <span class="money-left"></span>
+        </div>
+        <p class="goal-note"></p>
+        <div class="goal-controls">
+          <input type="number" class="amount-input" placeholder="€" min="0" step="1">
+          <button class="btn btn-yellow btn-sm btn-plus">+ €</button>
+          <button class="btn btn-red btn-sm btn-minus">− €</button>
+        </div>
+        <div class="goal-actions">
+          <button class="btn btn-blue btn-sm btn-go">GO!</button>
+          <button class="btn btn-white btn-sm btn-edit">✎</button>
+          <button class="btn btn-white btn-sm btn-history">ИСТОРИЯ</button>
+        </div>
+        <div class="history-wrap" hidden>
+          <ul class="history-list"></ul>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <div class="float-layer" id="floatLayer"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
